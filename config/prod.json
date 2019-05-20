@@ -1,0 +1,6 @@
+{
+  "production": true,
+  "database_name": "",
+  "database_password": "",
+  "port": 4200
+}
