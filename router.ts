@@ -1,9 +1,9 @@
-import { Index } from './actions';
+import { Index as UsersIndex } from './actions/users';
 
 const routes = {
-  '/v3': {
-    '/resorts': {
-      'get /:id/bookings': Index,
+  '/api/v1': {
+    '/users': {
+      'get /': UsersIndex,
     },
   },
 };
