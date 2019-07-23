@@ -4,8 +4,11 @@ dotenv.config();
 
 export type Config = {
   production: boolean;
-  database_name: string;
-  database_password: string;
+  postgres_db: string;
+  postgres_username: string;
+  postgres_password: string;
+  postgres_host: string;
+  postgres_port: number;
   port: number;
 };
 

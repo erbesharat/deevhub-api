@@ -1,6 +1,9 @@
 {
   "production": true,
-  "database_name": "",
-  "database_password": "",
+  "postgres_db": "localhost",
+  "postgres_username": "forge",
+  "postgres_password": "forge",
+  "postgres_host": "forge",
+  "postgres_port": 5432,
   "port": 4200
 }
