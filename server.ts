@@ -1,21 +1,51 @@
 import chalk from 'chalk';
 import * as Express from 'express';
+import { createConnection, EntityManager } from 'typeorm';
 
 import router from './router';
+import config from './config';
 
 const server: {
   app: Express.Application;
   router: { [key: string]: Express.Router };
+  orm: EntityManager;
 } = {
   app: null,
   router: {},
+  orm: null,
 };
 
 export const bootstrap = app => {
   server.app = app;
+  server.orm = setupTypeORM();
 
   registerRoutes('', app, router);
 };
+
+function setupTypeORM() {
+  let orm: EntityManager;
+  createConnection({
+    type: 'postgres',
+    host: config.postgres_host,
+    port: config.postgres_port,
+    username: config.postgres_username,
+    password: config.postgres_password,
+    database: config.postgres_db,
+    entities: [__dirname + '/models/*.ts'],
+    synchronize: true,
+    logging: !config.production,
+  })
+    .then(connection => {
+      console.log(
+        `[database]: Connected to ${config.postgres_host}:${
+          config.postgres_port
+        } succesfully`,
+      );
+      orm = connection.manager;
+    })
+    .catch(error => console.error(error));
+  return orm;
+}
 
 function registerRoutes(base, router, routes) {
   Object.keys(routes).forEach(route => {
