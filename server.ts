@@ -1,4 +1,5 @@
 import chalk from 'chalk';
+import 'reflect-metadata';
 import * as Express from 'express';
 import { createConnection, EntityManager } from 'typeorm';
 

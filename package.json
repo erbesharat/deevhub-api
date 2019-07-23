@@ -21,6 +21,7 @@
     "mongodb": "^3.2.5",
     "pg": "^7.11.0",
     "prettier": "^1.17.1",
+    "reflect-metadata": "^0.1.13",
     "sequelize": "^5.8.6",
     "ts-node": "^8.1.0",
     "typeorm": "^0.2.18",
