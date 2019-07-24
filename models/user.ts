@@ -13,7 +13,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ default: '', nullable: true })
   username: string;
 
   @Column()
@@ -24,6 +24,12 @@ export class User {
 
   @Column({ select: false })
   password: string;
+
+  @Column({ default: false })
+  emailVerified: boolean;
+
+  @Column({ default: false })
+  phoneVerified: boolean;
 
   @Column()
   createdAt: Date;

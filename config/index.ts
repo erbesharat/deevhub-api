@@ -9,6 +9,7 @@ export type Config = {
   postgres_password: string;
   postgres_host: string;
   postgres_port: number;
+  salt_rounds: number;
   port: number;
 };
 
