@@ -10,6 +10,8 @@ export type Config = {
   postgres_host: string;
   postgres_port: number;
   salt_rounds: number;
+  jwt_public: string;
+  jwt_private: string;
   port: number;
 };
 

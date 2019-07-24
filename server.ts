@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import 'reflect-metadata';
 import * as Express from 'express';
 import { createConnection, EntityManager } from 'typeorm';
+import bodyParser from 'body-parser';
 
 import router from './router';
 import config from './config';
@@ -17,6 +18,7 @@ const server: {
 };
 
 export const bootstrap = async app => {
+  app.use(bodyParser());
   server.app = app;
   server.orm = await setupTypeORM();
 

@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  CreateDateColumn,
 } from 'typeorm';
 
 import { Role } from './role';
@@ -22,7 +23,7 @@ export class User {
   @Column()
   phone: string;
 
-  @Column({ select: false })
+  @Column()
   password: string;
 
   @Column({ default: false })
@@ -31,10 +32,10 @@ export class User {
   @Column({ default: false })
   phoneVerified: boolean;
 
-  @Column()
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
-  @Column()
+  @CreateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 
   @OneToOne(type => Role)
