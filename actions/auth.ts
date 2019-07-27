@@ -7,6 +7,7 @@ import server from '../server';
 import { User } from '../models/user';
 import { Response } from '../tools/http';
 import config from '../config';
+import { Profile } from '../models/profile';
 
 let privateKEY = fs.readFileSync(config.jwt_private, 'utf8');
 
@@ -22,6 +23,8 @@ export const Register: Handler = async (req, res) => {
     password: hash,
     phone: req.body.phone || '',
     phoneVerified: false,
+    // Create an empty profile for the user
+    profile: new Profile(),
   });
 
   // Fetch back the user

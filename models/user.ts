@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 
 import { Role } from './role';
+import { Profile } from './profile';
 
 @Entity()
 export class User {
@@ -32,13 +33,17 @@ export class User {
   @Column({ default: false })
   phoneVerified: boolean;
 
+  @OneToOne(type => Role)
+  @JoinColumn()
+  role: Role;
+
+  @OneToOne(type => Profile, profile => profile.user)
+  @JoinColumn()
+  profile: Profile;
+
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
   @CreateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
-
-  @OneToOne(type => Role)
-  @JoinColumn()
-  role: Role;
 }
