@@ -3,6 +3,8 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  UpdateDateColumn,
+  OneToOne,
 } from 'typeorm';
 import { User } from './user';
 
@@ -12,40 +14,40 @@ export class Profile {
   id: number;
 
   @Column({ nullable: true })
-  firstname;
+  firstname: string;
 
   @Column({ nullable: true })
-  lastname;
+  lastname: string;
 
   @Column({ nullable: true })
-  gender;
+  gender: string;
 
   @Column({ nullable: true, default: false })
-  genderActive;
+  genderActive: boolean;
 
   @Column({ nullable: true })
-  birthday;
+  birthday: Date;
 
   @Column({ nullable: true, default: false })
-  birthdayActive;
+  birthdayActive: boolean;
+
+  @Column('simple-array', { nullable: true })
+  intrests: string[];
 
   @Column({ nullable: true })
-  intrests;
+  avatar: string;
 
   @Column({ nullable: true })
-  avatar;
+  bio: string;
 
   @Column({ nullable: true })
-  bio;
+  status: string;
 
   @Column({ nullable: true })
-  status;
+  xp: number;
 
   @Column({ nullable: true })
-  xp;
-
-  @Column({ nullable: true })
-  city;
+  city: string;
 
   @OneToOne(type => User, user => user.profile)
   user: User;
@@ -53,6 +55,6 @@ export class Profile {
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 }

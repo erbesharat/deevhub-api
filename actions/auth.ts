@@ -55,7 +55,6 @@ export const Login: Handler = async (req, res) => {
   let user = await UserRepository.findOne({
     where: [{ email: req.body.email }, { phone: req.body.phone }],
   });
-  console.log(user);
 
   // Return 404 error if user is not in the database
   if (!user) {
