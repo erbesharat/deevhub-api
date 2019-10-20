@@ -1,5 +1,14 @@
+.idea/
+.vscode/
+node_modules/
+build/
+tmp/
+temp/
+node_modules
 yarn-error.log
 .env
-node_modules
-.idea
-.vscode
+public.key
+private.key
+.PRIVATE_KEY
+.PUBLIC_KEY
+public/

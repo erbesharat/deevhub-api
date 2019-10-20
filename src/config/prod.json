@@ -1,0 +1,12 @@
+{
+  "production": true,
+  "postgres_db": "localhost",
+  "postgres_username": "forge",
+  "postgres_password": "forge",
+  "postgres_host": "forge",
+  "postgres_port": 5432,
+  "salt_rounds": 10,
+  "jwt_public": "/home/erbesharat/.keys/public.key",
+  "jwt_private": "/home/erbesharat/.keys/private.key",
+  "port": 4200
+}
