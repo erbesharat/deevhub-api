@@ -11,7 +11,6 @@ ENV POSTGRES_PORT=5432
 ENV SALT_ROUNDS=10
 ENV JWT_PUBLIC=/usr/src/app/.PUBLIC_KEY
 ENV JWT_PRIVATE=/usr/src/app/.PRIVATE_KEY
-ENV KAVENEGAR_KEY=KEY
 ENV PORT=4000
 
 # Install deps
@@ -24,6 +23,6 @@ RUN mkdir public/img
 
 COPY . .
 
-EXPOSE 4000
+EXPOSE ${PORT}
 
 CMD [ "yarn", "start" ]
