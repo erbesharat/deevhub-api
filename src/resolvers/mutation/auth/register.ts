@@ -1,5 +1,6 @@
 import fs from 'fs';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 import { app } from '../../../server';
 import { User } from '../../../models/User';
@@ -13,8 +14,11 @@ const register = async (obj, args, context) => {
 
   const { email, password } = args.input;
 
+  // Encrypt the password using salt rounds from config
+  let hash = bcrypt.hashSync(password, config.salt_rounds);
+
   const user = await UserRepository.save(
-    UserRepository.create({ email, password }),
+    UserRepository.create({ email, password: hash }),
   );
 
   return {

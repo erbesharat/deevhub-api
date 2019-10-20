@@ -1,5 +1,6 @@
 import fs from 'fs';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 import { app } from '../../../server';
 import { User } from '../../../models/User';
@@ -14,11 +15,19 @@ const login = async (obj, args, context) => {
   let user = await UserRepository.findOne({
     where: {
       email: args.input.email,
-      password: args.input.password,
     },
   });
 
   if (!user) {
+    return {
+      code: 404,
+      success: false,
+      message: "User doesn't exist",
+    };
+  }
+
+  // Authenticate user's password
+  if (!(await bcrypt.compare(args.input.password, user.password))) {
     return {
       code: 403,
       success: false,
