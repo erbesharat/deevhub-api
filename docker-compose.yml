@@ -8,7 +8,7 @@ services:
   postgres:
     image: 'postgres:9.6.1'
     ports:
-      - '5432:5432'
+      - '5431:5432'
     environment:
       POSTGRES_USER: 'forge'
       POSTGRES_PASSWORD: 'forge'
@@ -22,7 +22,7 @@ services:
     image: 'deevhub/api'
     build: '.'
     ports:
-      - '4000:4000'
+      - '${API_PORT}:${API_PORT}'
     environment:
       POSTGRES_USER: 'forge'
       POSTGRES_PASSWORD: 'forge'
@@ -32,7 +32,6 @@ services:
       POSTGRES_HOST: 'postgres'
       POSTGRES_PORT: 5432
       SALT_ROUNDS: 10
-      KAVENEGAR_KEY: '${KAVENEGAR_KEY}'
       PORT: '${API_PORT}'
     networks:
       - deevhub
