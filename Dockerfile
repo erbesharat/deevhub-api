@@ -16,6 +16,7 @@ ENV PORT=4000
 # Install deps
 RUN npm i -g ts-node
 COPY package.json yarn.lock ./
+RUN apk --no-cache add --virtual builds-deps build-base python
 RUN yarn
 
 RUN mkdir public
