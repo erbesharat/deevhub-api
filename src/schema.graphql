@@ -9,40 +9,50 @@ enum Place {
 
 type User {
   id: Int
-  phone: String
   email: String
-  name: String
-  degree: String
-  organization: String
-  city: String
   active: Boolean
-  token: String
+  profile: Profile
   createdAt: String
   updatedAt: String
 }
 
-input UserInput {
-  name: String
-  degree: String
-  organization: String
-  city: String
+type Profile {
+  nickname: String
+  avatar: String
+  gender: String
+  genderActive: Boolean
+  birthday: Date
+  birthdayActive: Boolean
+  xp: Int
+  credit: Int
 }
 
-input AccountInput {
-  email: String
-  phone: String
+input ProfileInput {
+  nickname: String
+  avatar: String
+  gender: String
+  genderActive: Boolean
+  birthday: Date
+  birthdayActive: Boolean
+  xp: Int
+  credit: Int
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
 
 # Responses
 
 interface Response {
-  code: String!
+  code: Int!
   success: Boolean!
   message: String!
 }
 
 type UserResponse implements Response {
-  code: String!
+  code: Int!
   success: Boolean!
   message: String!
   user: User
@@ -52,15 +62,8 @@ type UserResponse implements Response {
 
 type Mutation {
   # Auth Mutations
-  register(email: String!, password: String!, name: String!): UserResponse!
+  register(input: LoginInput!): UserResponse!
   login(email: String!, password: String!): UserResponse!
-  forgotPassowrd: UserResponse!
-  verifyForgotPassword(code: String!, password: String!): UserResponse!
-
-  # User mutations
-  updateUser(input: UserInput!): UserResponse!
-  updateAccountOTP: UserResponse!
-  updateAccount(code: String!, input: AccountInput!): UserResponse!
 }
 
 type Query {

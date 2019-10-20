@@ -1,4 +1,3 @@
-import Dataval from 'dataval';
 import fs from 'fs';
 import jwt from 'jsonwebtoken';
 
@@ -14,8 +13,8 @@ const login = async (obj, args, context) => {
 
   let user = await UserRepository.findOne({
     where: {
-      email: args.email,
-      password: args.password,
+      email: args.input.email,
+      password: args.input.password,
     },
   });
 
@@ -23,16 +22,20 @@ const login = async (obj, args, context) => {
     return {
       code: 403,
       success: false,
-      message: 'ایمیل یا رمز‌عبور نادرست می‌باشد',
+      message: 'Email or Password is incorrect',
     };
   }
 
   // Generate the JWT Token
   let token =
     'Bearer ' +
-    jwt.sign({ email: user.email, phone: user.phone } as Token, privateKEY, {
-      algorithm: 'RS256',
-    });
+    jwt.sign(
+      { email: user.email, createdAt: new Date() } as Token,
+      privateKEY,
+      {
+        algorithm: 'RS256',
+      },
+    );
 
   let result = { token, ...user };
 

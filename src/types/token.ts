@@ -1,6 +1,6 @@
 export interface Token {
   email: String;
-  phone: String;
+  createdAt: Date;
 }
 
 export interface Response {

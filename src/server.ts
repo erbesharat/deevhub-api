@@ -61,7 +61,7 @@ const getUser = async (token: String) => {
 
     const UserRepository = app.db.getRepository(User);
     const result = await UserRepository.findOne({
-      where: { phone: user.phone },
+      where: { email: user.email },
     });
 
     return result;

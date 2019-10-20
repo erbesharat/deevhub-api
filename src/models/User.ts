@@ -4,11 +4,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToMany,
-  JoinTable,
-  OneToMany,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
-import { OTP } from './OTP';
+
+import { Profile } from './Profile';
 
 @Entity()
 export class User {
@@ -19,12 +19,6 @@ export class User {
     nullable: false,
     unique: true,
   })
-  phone: string;
-
-  @Column({
-    nullable: true,
-    unique: true,
-  })
   email: string;
 
   @Column({
@@ -33,33 +27,13 @@ export class User {
   password: string;
 
   @Column({
-    nullable: false,
-  })
-  name: string;
-
-  @Column({
-    nullable: true,
-  })
-  degree: string;
-
-  @Column({
-    nullable: true,
-  })
-  organization: string;
-
-  @Column({
-    nullable: true,
-  })
-  city: string;
-
-  @Column({
     default: false,
   })
   active: boolean;
 
-  @OneToMany(type => OTP, otp => otp.user)
-  @JoinTable()
-  tokens: OTP[];
+  @OneToOne(type => Profile)
+  @JoinColumn()
+  profile: Profile;
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
