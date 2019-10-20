@@ -1,0 +1,43 @@
+version: '3'
+
+networks:
+  deevhub:
+    external: false
+
+services:
+  postgres:
+    image: 'postgres:9.6.1'
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: 'forge'
+      POSTGRES_PASSWORD: 'forge'
+      POSTGRES_DB: 'forge'
+    volumes:
+      - deevhub_data:/var/lib/postgresql/data
+    networks:
+      - deevhub
+
+  api:
+    image: 'deevhub/api'
+    build: '.'
+    ports:
+      - '4000:4000'
+    environment:
+      POSTGRES_USER: 'forge'
+      POSTGRES_PASSWORD: 'forge'
+      POSTGRES_DB: 'forge'
+      PRODUCTION: 1
+      POSTGRES_USERNAME: 'forge'
+      POSTGRES_HOST: 'postgres'
+      POSTGRES_PORT: 5432
+      SALT_ROUNDS: 10
+      KAVENEGAR_KEY: '${KAVENEGAR_KEY}'
+      PORT: '${API_PORT}'
+    networks:
+      - deevhub
+    depends_on:
+      - postgres
+
+volumes:
+  deevhub_data:
